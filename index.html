@@ -54,7 +54,11 @@
         document.onmousemove = null
         document.onmouseup = null
       }
-      new Drag('box1').init()
+      function extend(sub, sup) {
+        for (const key in sup.prototype) {
+          sub.prototype[key] = sup.prototype[key]
+        }
+      }
     </script>
   </body>
 </html>
