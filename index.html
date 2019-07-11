@@ -24,5 +24,37 @@
   <body>
     <div id="box1"></div>
     <div id="box2"></div>
+    <script>
+      function Drag(id) {
+        this.x = 0
+        this.y = 0
+        this.ele = document.getElementById(id)
+      }
+      Drag.prototype.init = function() {
+        var _this = this
+        this.ele.onmousedown = function(ev) {
+          _this.down(ev)
+          document.onmousemove = function(ev) {
+            _this.move(ev)
+          }
+          document.onmouseup = function(ev) {
+            _this.up(ev)
+          }
+        }
+      }
+      Drag.prototype.down = function(ev) {
+        this.x = ev.pageX - this.ele.offsetLeft
+        this.y = ev.pageY - this.ele.offsetTop
+      }
+      Drag.prototype.move = function(ev) {
+        this.ele.style.left = ev.pageX - this.x + 'px'
+        this.ele.style.top = ev.pageY - this.x + 'px'
+      }
+      Drag.prototype.up = function(ev) {
+        document.onmousemove = null
+        document.onmouseup = null
+      }
+      new Drag('box1').init()
+    </script>
   </body>
 </html>
