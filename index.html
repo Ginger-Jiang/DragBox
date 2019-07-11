@@ -54,6 +54,15 @@
         document.onmousemove = null
         document.onmouseup = null
       }
+
+      function ChildDrag(id) {
+        Drag.call(this, id)
+      }
+
+      extend(ChildDrag, Drag)
+      new Drag('box1').init()
+      new ChildDrag('box2').init()
+
       function extend(sub, sup) {
         for (const key in sup.prototype) {
           sub.prototype[key] = sup.prototype[key]
